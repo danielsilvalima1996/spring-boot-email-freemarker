@@ -49,6 +49,14 @@ public class EmailService {
       helper.setSubject(request.getSubject());
       helper.setFrom(request.getFrom());
 
+      if (request.getCopia().size() > 0) {
+        String[] cc = new String[request.getCopia().size()];
+        for(int i = 0; i < request.getCopia().size(); i++) {
+          cc[i] = request.getCopia().get(i);
+        }
+        helper.setCc(cc);
+      }
+
       sender.send(message);
 
       response.setMessage("E-mail enviado para: " + request.getTo());
